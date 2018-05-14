@@ -20,51 +20,50 @@ SOLVED_STREAK = 100
 
 def run():
 
-        current_streak = 0
+    current_streak = 0
 
-            for i_episode in range(MAX_EPISODES):
-                        observation = env.reset()
+    for i_episode in range(MAX_EPISODES):
+        observation = env.reset()
 
-                                sum_rewards = 0
+        sum_rewards = 0
 
-                                        for t in range(MAX_TIME):
+        for t in range(MAX_TIME):
 
-                                                        env.render()
-                                                                    # print(observation)
+            env.render()
+            # print(observation)
 
-                                                                                action = env.action_space.sample()
-                                                                                            observation, reward, done, info = env.step(action)
+            action = env.action_space.sample()
+            observation, reward, done, info = env.step(action)
 
-                                                                                                        # print(reward)
-                                                                                                                    sum_rewards += reward
+            # print(reward)
+            sum_rewards += reward
 
-                                                                                                                                if done:
-                                                                                                                                                    print("Episode %s finished after %s timesteps (current steak %s)" % (i_episode, t + 1, current_streak))
+            if done:
+                print("Episode %s finished after %s timesteps (current steak %s)" % (i_episode, t + 1, current_streak))
 
-                                                                                                                                                                    # episode success
-                                                                                                                                                                                    if sum_rewards / t > SOLVED_REWARD:
-                                                                                                                                                                                                            current_streak += 1
-                                                                                                                                                                                                                            else:
-                                                                                                                                                                                                                                                    current_streak = 0
+                # episode success
+                if sum_rewards / t > SOLVED_REWARD:
+                    current_streak += 1
+                else:
+                    current_streak = 0
 
-                                                                                                                                                                                                                                                                    break
+                break
 
-                                                                                                                                                                                                                                                                        if current_streak >= SOLVED_STREAK:
-                                                                                                                                                                                                                                                                                        print("Problem solved! In %s episodes" % i_episode)
-                                                                                                                                                                                                                                                                                                    break
+        if current_streak >= SOLVED_STREAK:
+            print("Problem solved! In %s episodes" % i_episode)
+            break
 
-                                                                                                                                                                                                                                                                                                    else:
-                                                                                                                                                                                                                                                                                                                print(":(")
+    else:
+        print(":(")
 
 
-                                                                                                                                                                                                                                                                                                                        def discretize_state(state):
-                                                                                                                                                                                                                                                                                                                            '''
-                                                                                                                                                                                                                                                                                                                                state is the environment raw response
-                                                                                                                                                                                                                                                                                                                                    each of the 4 dimensions is discretized into appropriate bins
+def discretize_state(state):
+    '''
+    state is the environment raw response
+    each of the 4 dimensions is discretized into appropriate bins
 
-                                                                                                                                                                                                                                                                                                                                        '''
-                                                                                                                                                                                                                                                                                                                                            pass
+    '''
+    pass
 
-                                                                                                                                                                                                                                                                                                                                            if __name__ == "__main__":
-                                                                                                                                                                                                                                                                                                                                                run()
-
+if __name__ == "__main__":
+    run()
